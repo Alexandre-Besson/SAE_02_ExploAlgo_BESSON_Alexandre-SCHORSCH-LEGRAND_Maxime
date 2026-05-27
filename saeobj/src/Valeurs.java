@@ -89,8 +89,25 @@ public class Valeurs {
             String noeudParent = parent.get(s);
             res += s + " ->  V:" + valeurNoeud + " p:" + noeudParent + "\n";
         }
-        return res;
 
-    }
+
+        public List<String> calculerChemin(String destination) {
+                List<String> chemin = new ArrayList<>();
+                String courant = destination;
+                
+                while (courant != null) {
+                    chemin.add(0, courant);
+                    courant = this.getParent(courant);
+                }
+                
+                if (chemin.isEmpty() || !chemin.get(0).equals(chemin.get(0))) {
+                    return new ArrayList<>();
+                }
+                
+                return chemin;
+                    }
+                    return res;
+
+                }
 
 }
