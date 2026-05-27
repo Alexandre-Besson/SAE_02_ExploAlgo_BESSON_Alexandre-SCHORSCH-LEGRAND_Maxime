@@ -1,55 +1,39 @@
+import java.util.List;
+
 public class MainTransport {
 
     public static void main(String[] args) {
-
         if (args.length < 2) {
-            System.err.println("Erreur : fournir depart et arrivee (codes STAN)");
+            System.err.println("Erreur : Deux identifiants de stations sont requis.");
             return;
         }
 
-        String depart = args[0];
-        String arrivee = args[1];
+        String stationDepart = args[0];
+        String stationArrivee = args[1];
 
-        try {
-            // Chargement du graphe
-            Graphe g = LireReseau.lire("stan.nodes.txt", "stan.edges.txt");
+        String fichierNodes = "stan.nodes.txt";
+        String fichierEdges = "stan.edges.txt";
 
-            // =========================
-            // BELLMAN-FORD
-            // =========================
-            long startBF = System.nanoTime();
-            BellmanFord bf = new BellmanFord();
-            Valeurs resBF = bf.resoudre(g, depart);
-            long endBF = System.nanoTime();
+        Graphe graphe = LireReseau.lire(fichierNodes, fichierEdges);
 
-            // =========================
-            // DIJKSTRA
-            // =========================
-            long startDJ = System.nanoTime();
-            Dijkstra dj = new Dijkstra();
-            Valeurs resDJ = dj.resoudre(g, depart);
-            long endDJ = System.nanoTime();
+        BellmanFord bf = new BellmanFord();
 
-            // =========================
-            // CHEMINS
-            // =========================
-            String cheminBF = String.join(";", resBF.calculerChemin(arrivee));
-            String cheminDJ = String.join(";", resDJ.calculerChemin(arrivee));
+        long startTime = System.nanoTime();
+        Valeurs resultats = bf.resoudre(graphe, stationDepart);
+        long endTime = System.nanoTime();
 
-            // =========================
-            // SORTIE POUR GUI (OBLIGATOIRE)
-            // =========================
-            System.out.println(cheminBF);
+        System.err.println("Temps execution Bellman-Ford : " + (endTime - startTime) + " ns");
 
-            // =========================
-            // TEMPS (pour rapport / debug)
-            // =========================
-            System.err.println("Temps Bellman-Ford : " + (endBF - startBF) + " ns");
-            System.err.println("Temps Dijkstra : " + (endDJ - startDJ) + " ns");
+        List<String> chemin = resultats.calculerChemin(stationArrivee);
 
-        } catch (Exception e) {
-            System.err.println("Erreur exécution : " + e.getMessage());
-            e.printStackTrace();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < chemin.size(); i++) {
+            sb.append(chemin.get(i));
+            if (i < chemin.size() - 1) {
+                sb.append(";");
+            }
         }
+
+        System.out.println(sb.toString());
     }
 }
