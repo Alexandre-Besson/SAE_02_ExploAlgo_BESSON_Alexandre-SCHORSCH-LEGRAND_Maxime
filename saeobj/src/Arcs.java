@@ -2,14 +2,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Arcs {
-    List<Arc> Listedarc;
-    public Arcs(){
-        List<Arc> Listedarc= new ArrayList<Arc>();
+    private List<Arc> liste;
+
+    public Arcs() {
+        this.liste = new ArrayList<>();
     }
-    public void addliste(Arc a){
-        Listedarc.add(a);
+
+    public void ajouterArc(Arc a) {
+        liste.add(a);
     }
-    public List<Arc> getListe(){
-        return this.Listedarc;
+
+    public List<Arc> getListe() {
+        return liste;
+    }
+
+    public boolean estVide() {
+        return liste.isEmpty();
+    }
+
+
+    public String toString() {
+        return liste.toString();
     }
 }
