@@ -7,10 +7,10 @@ public class Dijkstra {
 
         Valeurs v = new Valeurs();
 
-        // Liste des noeuds à traiter
+
         List<String> Q = new ArrayList<>();
 
-        // Initialisation
+
         for (String noeud : g.getNoeuds()) {
 
             v.setValeur(noeud, Double.MAX_VALUE);
@@ -19,13 +19,13 @@ public class Dijkstra {
             Q.add(noeud);
         }
 
-        // Le départ vaut 0
+
         v.setValeur(depart, 0);
 
-        // Tant qu'il reste des noeuds à traiter
+
         while (!Q.isEmpty()) {
 
-            // Recherche du noeud de valeur minimale
+
             String u = null;
             double min = Double.MAX_VALUE;
 
@@ -37,21 +37,20 @@ public class Dijkstra {
                 }
             }
 
-            // Retirer le noeud traité
+
             Q.remove(u);
 
-            // Parcourir ses voisins
+
             for (Arc arc : g.getAdjacents(u)) {
 
                 String voisin = arc.getCible();
 
-                // On ne traite que ceux encore dans Q
+
                 if (Q.contains(voisin)) {
 
                     double nouvelleDistance =
                             v.getValeur(u) + arc.getPoids();
 
-                    // Mise à jour si meilleur chemin
                     if (nouvelleDistance <
                             v.getValeur(voisin)) {
 
