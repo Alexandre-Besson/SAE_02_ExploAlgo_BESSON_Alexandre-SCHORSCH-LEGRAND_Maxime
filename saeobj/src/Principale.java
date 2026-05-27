@@ -10,6 +10,6 @@ public class Principale {
         graphe.ajouterArc("D", "C", 10.0);
         graphe.ajouterArc("E", "D", 43.0);
 
-        System.out.println(graphe.toString());
+       graphe.afficher();
     }
 }

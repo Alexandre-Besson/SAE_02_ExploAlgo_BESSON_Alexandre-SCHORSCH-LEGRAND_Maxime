@@ -44,7 +44,7 @@ public class GrapheListe implements Graphe {
     }
 
 
-    public void afficher() {
+    public  void afficher() {
         for (int i = 0; i < noeuds.size(); i++) {
             System.out.print(noeuds.get(i) + " -> ");
 

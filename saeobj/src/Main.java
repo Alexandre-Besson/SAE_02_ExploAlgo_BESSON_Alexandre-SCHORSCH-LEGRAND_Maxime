@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
 
         GrapheListe g = new GrapheListe();
-        
+
         g.ajouterArc("A", "B", 12);
         g.ajouterArc("A", "D", 87);
 
