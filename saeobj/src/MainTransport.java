@@ -3,37 +3,101 @@ import java.util.List;
 public class MainTransport {
 
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.err.println("Erreur : Deux identifiants de stations sont requis.");
-            return;
-        }
 
-        String stationDepart = args[0];
-        String stationArrivee = args[1];
+        try {
 
-        String fichierNodes = "stan.nodes.txt";
-        String fichierEdges = "stan.edges.txt";
+            if(args.length < 2){
 
-        Graphe graphe = LireReseau.lire(fichierNodes, fichierEdges);
+                System.out.println(
+                        "Usage : java MainTransport depart arrivee"
+                );
 
-        BellmanFord bf = new BellmanFord();
-
-        long startTime = System.nanoTime();
-        Valeurs resultats = bf.resoudre(graphe, stationDepart);
-        long endTime = System.nanoTime();
-
-        System.err.println("Temps execution Bellman-Ford : " + (endTime - startTime) + " ns");
-
-        List<String> chemin = resultats.calculerChemin(stationArrivee);
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < chemin.size(); i++) {
-            sb.append(chemin.get(i));
-            if (i < chemin.size() - 1) {
-                sb.append(";");
+                return;
             }
+
+            String depart=args[0];
+            String arrivee=args[1];
+
+            Graphe g =
+                    LireReseau.lire(
+                            "stan.nodes.txt",
+                            "stan.edges.txt"
+                    );
+
+            /*
+             * Bellman Ford
+             */
+
+            BellmanFord bf =
+                    new BellmanFord();
+
+            long debutBF =
+                    System.nanoTime();
+
+            Valeurs valBF =
+                    bf.resoudre(g,depart);
+
+            long finBF =
+                    System.nanoTime();
+
+            List<String> cheminBF =
+                    valBF.calculerChemin(arrivee);
+
+            /*
+             * Dijkstra
+             */
+
+            Dijkstra d =
+                    new Dijkstra();
+
+            long debutD =
+                    System.nanoTime();
+
+            Valeurs valD =
+                    d.resoudre(g,depart);
+
+            long finD =
+                    System.nanoTime();
+
+            List<String> cheminD =
+                    valD.calculerChemin(arrivee);
+
+            /*
+             * affichage
+             */
+
+            System.out.println(
+                    "Bellman Ford : "
+                            + cheminBF
+            );
+
+            System.out.println(
+                    "Temps BF : "
+                            +(finBF-debutBF)
+                            +" ns"
+            );
+
+            System.out.println();
+
+            System.out.println(
+                    "Dijkstra : "
+                            + cheminD
+            );
+
+            System.out.println(
+                    "Temps Dijkstra : "
+                            +(finD-debutD)
+                            +" ns"
+            );
+
+
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+
         }
 
-        System.out.println(sb.toString());
     }
+
 }
