@@ -5,8 +5,11 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class TestDIjkstra {
+    public static void main(String[] args) {
+        testPlusCourtChemin();
+    }
 
-    public void testPlusCourtChemin() {
+    public static void testPlusCourtChemin() {
 
         GrapheListe g = new GrapheListe();
 
@@ -28,16 +31,11 @@ public class TestDIjkstra {
 
         Valeurs v = d.resoudre(g,"A");
 
-        List<String> chemin =
-                v.calculerChemin("C");
+        List<String> chemin = v.calculerChemin("C");
 
-        assertEquals(76.0,
-                v.getValeur("C"),
-                0.001);
+        assertEquals(76.0,v.getValeur("C"),0.001);
 
-        assertEquals(
-                "[A, B, E, D, C]",
-                chemin.toString()
+        assertEquals("[A, B, E, D, C]", chemin.toString()
         );
     }
 }

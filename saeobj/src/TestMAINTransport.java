@@ -2,8 +2,11 @@ import org.junit.Test;
 
 public class TestMAINTransport {
 
+    public static void main(String[] args) {
+        testMainTransport();
+    }
 
-    public void testMainTransport() {
+    public static void testMainTransport() {
 
         String[] args = {
                 "LNHTM1",

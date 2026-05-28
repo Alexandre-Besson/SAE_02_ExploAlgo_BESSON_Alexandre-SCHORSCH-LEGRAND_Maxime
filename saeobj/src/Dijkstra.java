@@ -48,21 +48,13 @@ public class Dijkstra {
 
                 if (Q.contains(voisin)) {
 
-                    double nouvelleDistance =
-                            v.getValeur(u) + arc.getPoids();
+                    double nouvelleDistance = v.getValeur(u) + arc.getPoids();
 
-                    if (nouvelleDistance <
-                            v.getValeur(voisin)) {
+                    if (nouvelleDistance < v.getValeur(voisin)) {
 
-                        v.setValeur(
-                                voisin,
-                                nouvelleDistance
-                        );
+                        v.setValeur(voisin, nouvelleDistance);
 
-                        v.setParent(
-                                voisin,
-                                u
-                        );
+                        v.setParent(voisin,u);
                     }
                 }
             }

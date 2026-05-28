@@ -38,7 +38,7 @@ public class Valeurs {
         String res = "";
 
         for (String s : this.valeur.keySet()) {
-            // ajoute la valeur et le noeud parent
+
             Double valeurNoeud = valeur.get(s);
             String noeudParent = parent.get(s);
             res += s + " ->  V:" + valeurNoeud + " p:" + noeudParent + "\n";
