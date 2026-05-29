@@ -2,8 +2,25 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Classe utilitaire permettant de charger un graphe de transport
+ * à partir de fichiers texte.
+ * <p>
+ * Le graphe est construit à partir :
+ * <ul>
+ *   <li>d'un fichier de stations (nœuds)</li>
+ *   <li>d'un fichier de connexions pondérées (arêtes)</li>
+ * </ul>
+ */
 public class LireReseau {
 
+    /**
+     * Lit deux fichiers et construit un graphe non orienté pondéré.
+     *
+     * @param fichier_stations fichier contenant la liste des stations (nœuds)
+     * @param fichier_connexions fichier contenant les connexions entre stations (arêtes)
+     * @return un graphe représentant le réseau de transport
+     */
     public static Graphe lire(String fichier_stations, String fichier_connexions) {
         GrapheListe graphe = new GrapheListe();
 
